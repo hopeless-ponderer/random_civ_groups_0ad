@@ -1,0 +1,12 @@
+{
+	"Title": "Hellenic",
+	"Code": "hele",
+	"Tooltip": "Greek civs.",
+	"Weights": {
+		"athen": 2,
+		"mace": 2,
+		"ptol": 1,
+		"sele": 2,
+		"spart": 2
+	}
+}

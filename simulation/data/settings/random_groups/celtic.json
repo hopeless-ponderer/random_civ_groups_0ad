@@ -1,0 +1,9 @@
+{
+	"Title": "Celtic",
+	"Code": "celt",
+	"Tooltip": "Celtic civs.",
+	"Weights": {
+		"brit": 1,
+		"gaul": 1
+	}
+}

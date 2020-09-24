@@ -1,0 +1,13 @@
+{
+	"Title": "Non-European",
+	"Code": "non_euro",
+	"Tooltip": "Non-European civs.",
+	"Weights": {
+		"cart": 1,
+		"kush": 1,
+		"maur": 1,
+		"pers": 1,
+		"ptol": 1,
+		"sele": 1
+	}
+}

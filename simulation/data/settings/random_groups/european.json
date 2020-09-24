@@ -1,0 +1,14 @@
+{
+	"Title": "European",
+	"Code": "euro",
+	"Tooltip": "European civs.",
+	"Weights": {
+		"athen": 1,
+		"brit": 1,
+		"gaul": 1,
+		"iber": 1,
+		"mace": 1,
+		"rome": 1,
+		"spart": 1
+	}
+}

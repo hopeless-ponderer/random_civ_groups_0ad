@@ -1,0 +1,10 @@
+{
+	"Title": "Asian",
+	"Code": "asia",
+	"Tooltip": "Asian civs.",
+	"Weights": {
+		"maur": 1,
+		"pers": 1,
+		"sele": 1
+	}
+}
