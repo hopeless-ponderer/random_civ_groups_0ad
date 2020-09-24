@@ -1,6 +1,7 @@
 {
 	"Title": "Barbarian",
 	"Code": "barb",
+	"GUIOrder": 1,
 	"Tooltip": "Less-developed European civs, including Britons, Gauls, and Iberians.",
 	"Weights": {
 		"brit": 1,

@@ -97,7 +97,7 @@ var g_PlayerCivList = g_CivData && prepareForDropdown([{
 		'code': 'random.' + group.Code,
 		'weights': group.Weights,
 		'random': true
-	}))).concat(
+	})).sort((a, b) => a.GUIOrder - b.GUIOrder)).concat(
 		Object.keys(g_CivData).filter(
 			civ => g_CivData[civ].SelectableInGameSetup
 		).map(civ => ({

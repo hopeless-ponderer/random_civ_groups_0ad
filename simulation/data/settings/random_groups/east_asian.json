@@ -1,0 +1,10 @@
+{
+	"Title": "East Asian",
+	"Code": "east_asia",
+	"GUIOrder": 1,
+	"Tooltip": "Chinese and Xiongnu civs from Terra Magna.",
+	"Weights": {
+		"chin": 1,
+		"xion": 1
+	}
+}

@@ -1,6 +1,7 @@
 {
 	"Title": "Hellenic",
 	"Code": "hele",
+	"GUIOrder": 1,
 	"Tooltip": "Greek civs.",
 	"Weights": {
 		"athen": 2,

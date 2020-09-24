@@ -1,6 +1,7 @@
 {
 	"Title": "Default",
 	"Code": "default",
+	"GUIOrder": 0,
 	"Tooltip": "Vanilla 0ad civs only. No mods.",
 	"Weights": {
 		"athen": 1,

@@ -1,6 +1,7 @@
 {
 	"Title": "African",
 	"Code": "afr",
+	"GUIOrder": 1,
 	"Tooltip": "African civs.",
 	"Weights": {
 		"cart": 1,

@@ -1,0 +1,13 @@
+{
+	"Title": "Millennium A.D.",
+	"Code": "millenniumad",
+	"GUIOrder": 1,
+	"Tooltip": "Civs from Millennium A.D.",
+	"Weights": {
+		"anglo": 1,
+		"byza": 1,
+		"caro": 1,
+		"norse": 1,
+		"umay": 1
+	}
+}

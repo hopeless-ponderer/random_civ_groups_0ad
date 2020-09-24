@@ -1,6 +1,7 @@
 {
 	"Title": "Mediterranean",
 	"Code": "med",
+	"GUIOrder": 1,
 	"Tooltip": "Civs based around the mediterranean sea. Includes Rome, Carthage, and the Hellenic Civs.",
 	"Weights": {
 		"athen": 2,

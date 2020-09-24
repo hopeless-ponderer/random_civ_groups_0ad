@@ -1,6 +1,7 @@
 {
 	"Title": "Non-European",
 	"Code": "non_euro",
+	"GUIOrder": 1,
 	"Tooltip": "Non-European civs.",
 	"Weights": {
 		"cart": 1,
