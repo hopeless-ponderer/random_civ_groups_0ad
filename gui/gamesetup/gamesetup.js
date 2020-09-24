@@ -627,18 +627,17 @@ var g_Dropdowns = {
 		"tooltip": (hoverIdx) => {
 			return hoverIdx >= 0 ?
 				sprintf(translate("Initial amount of each resource: %(resources)s."), {
-					"resources": g_StartingResources.AmountLabel[hoverIdx]
+					"resources": g_StartingResources.Resources[hoverIdx]
 				}) :
 				translate("Select the game's starting resources.");
 		},
 		"labels": () => g_StartingResources.Title,
-		"ids": () => g_StartingResources.AmountLabel,
+		"ids": () => g_StartingResources.Resources,
 		"default": () => g_StartingResources.Default,
 		"defined": () => g_GameAttributes.settings.StartingResources !== undefined,
-		"get": () => g_GameAttributes.settings.hasOwnProperty('StartingResourcesAmount') ? g_GameAttributes.settings.StartingResourcesAmount : undefined,
+		"get": () => g_GameAttributes.settings.StartingResources,
 		"select": (itemIdx) => {
 			g_GameAttributes.settings.StartingResources = g_StartingResources.Resources[itemIdx];
-			g_GameAttributes.settings.StartingResourcesAmount = g_StartingResources.AmountLabel[itemIdx];
 		},
 		"hidden": () => g_GameAttributes.mapType == "scenario",
 		"autocomplete": 0,
