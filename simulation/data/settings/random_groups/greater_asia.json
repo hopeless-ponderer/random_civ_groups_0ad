@@ -1,0 +1,13 @@
+{
+	"Title": "Asia Expanded",
+	"Code": "greater_asian",
+	"GUIOrder": 2,
+	"Tooltip": "Default asian civs plus Terra Magna asian civs.",
+	"Weights": {
+		"maur": 2,
+		"pers": 2,
+		"sele": 1,
+		"chin": 2,
+		"xion": 2
+	}
+}

@@ -18,9 +18,19 @@ var g_GameSpeeds = getGameSpeedChoices(false);
  */
 const g_CivData = loadCivData(false, false);
 const g_RandomCivGroups = loadRandomCivGroups().filter((group) => {
+	if (group.disable)
+		return false;
+	if (group.Weights.length < 1) {
+		warn(sprintf('Random civ groups must contain at least one civ; disabling %s', group.Title));
+		return false;
+	}
 	for (let civ in group.Weights) {
 		if (!g_CivData.hasOwnProperty(civ))
 			return false;
+		if (group.Weights[civ] <= 0) {
+			warn(sprintf('Random civ group weights must be > 0 (got "%s": %d); disabling %s', civ, group.Weights[civ], group.Title));
+			return false;
+		}
 	}// end for civ
 	return true;
 });
@@ -95,9 +105,9 @@ var g_PlayerCivList = g_CivData && prepareForDropdown([{
 		'tooltip': group.Tooltip,
 		'color': g_ColorRandom,
 		'code': 'random.' + group.Code,
-		'weights': group.Weights,
+		'gui_order': group.GUIOrder,
 		'random': true
-	})).sort((a, b) => a.GUIOrder - b.GUIOrder)).concat(
+	})).sort((a, b) => a.gui_order - b.gui_order)).concat(
 		Object.keys(g_CivData).filter(
 			civ => g_CivData[civ].SelectableInGameSetup
 		).map(civ => ({

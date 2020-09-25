@@ -4,8 +4,8 @@
 	"GUIOrder": 1,
 	"Tooltip": "Asian civs.",
 	"Weights": {
-		"maur": 1,
-		"pers": 1,
+		"maur": 2,
+		"pers": 2,
 		"sele": 1
 	}
 }

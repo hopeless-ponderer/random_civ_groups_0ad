@@ -4,10 +4,10 @@
 	"GUIOrder": 1,
 	"Tooltip": "Greek civs.",
 	"Weights": {
-		"athen": 2,
-		"mace": 2,
+		"athen": 3,
+		"mace": 2.5,
 		"ptol": 1,
 		"sele": 2,
-		"spart": 2
+		"spart": 3
 	}
 }
