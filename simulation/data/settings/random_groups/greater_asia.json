@@ -1,6 +1,7 @@
 {
 	"Title": "Asia Expanded",
 	"Code": "greater_asian",
+	"Color": "green",
 	"GUIOrder": 2,
 	"Tooltip": "Default asian civs plus Terra Magna asian civs.",
 	"Weights": {

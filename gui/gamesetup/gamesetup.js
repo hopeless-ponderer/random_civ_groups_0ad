@@ -18,7 +18,7 @@ var g_GameSpeeds = getGameSpeedChoices(false);
  */
 const g_CivData = loadCivData(false, false);
 const g_RandomCivGroups = loadRandomCivGroups().filter((group) => {
-	if (group.disable)
+	if (group.Disable)
 		return false;
 	if (group.Weights.length < 1) {
 		warn(sprintf('Random civ groups must contain at least one civ; disabling %s', group.Title));
@@ -103,7 +103,7 @@ var g_PlayerCivList = g_CivData && prepareForDropdown([{
 	}].concat(g_RandomCivGroups.map((group) => ({
 		'name': 'Random/' + group.Title,
 		'tooltip': group.Tooltip,
-		'color': g_ColorRandom,
+		'color': group.Color ? group.Color : g_ColorRandom,
 		'code': 'random.' + group.Code,
 		'gui_order': group.GUIOrder,
 		'random': true

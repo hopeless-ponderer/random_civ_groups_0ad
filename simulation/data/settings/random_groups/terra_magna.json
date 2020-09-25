@@ -1,6 +1,7 @@
 {
 	"Title": "Terra Magna",
 	"Code": "terra_magna",
+	"Color": "green",
 	"GUIOrder": 2,
 	"Tooltip": "Civs from Terra Magna.",
 	"Weights": {

@@ -1,6 +1,7 @@
 {
 	"Title": "Millennium A.D.",
 	"Code": "millenniumad",
+	"Color": "green",
 	"GUIOrder": 2,
 	"Tooltip": "Civs from Millennium A.D.",
 	"Weights": {
