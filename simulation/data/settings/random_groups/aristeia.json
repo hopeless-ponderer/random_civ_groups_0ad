@@ -1,0 +1,13 @@
+{
+	"Title": "Aristeia",
+	"Tooltip": "Civs from the mod Aristeia.",
+	"Code": "aristeia",
+	"Color": "green",
+	"GUIOrder": 2,
+	"Weights": {
+		"arcgreek": 1,
+		"assyrian": 1,
+		"egyptian": 1,
+		"judah": 1
+	}
+}
