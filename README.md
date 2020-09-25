@@ -25,4 +25,13 @@ Currently, selection groups are provided for the following mods:
 
 I will consider adding selection groups for [Delenda Est](https://github.com/JustusAvramenko/delenda_est), but it might be better served by another mod that overrides some of the selection groups provided here.
 
+## Compatibility
 Although this mod supports many other mods, it only requires basic 0ad.
+
+This mod alters the following javascript files:
+
+- gui/gamesetup/gamesetup.js
+- gui/common/functions\_utility.js
+- globalscripts/Templates.js
+
+Any mod that also alters any of these files will likely be incompatible.
