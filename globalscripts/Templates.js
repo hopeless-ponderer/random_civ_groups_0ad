@@ -7,8 +7,8 @@
 function loadCivFiles(selectableOnly)
 {
 	let propertyNames = [
-		"Code", "Culture", "Name", "Emblem", "History", "Music", "Factions", "CivBonuses", "TeamBonuses",
-		"Structures", "StartEntities", "Formations", "AINames", "SkirmishReplacements", "SelectableInGameSetup"];
+		"Code", "Culture", "Name", "Emblem", "History", "Music", "CivBonuses", "StartEntities",
+		"Formations", "AINames", "SkirmishReplacements", "SelectableInGameSetup"];
 
 	let civData = {};
 
@@ -28,38 +28,22 @@ function loadCivFiles(selectableOnly)
 }
 
 /**
- * Loads files for random civ selection.
- *
- */
-function loadRandomCivFiles()
-{
-	let randomGroups = [];
-
-	for (let filename of Engine.ListDirectoryFiles("simulation/data/settings/random_groups/", "*.json", false))
-	{
-		let data = Engine.ReadJSONFile(filename);
-
-		randomGroups.push(data);
-	}// end for let filename
-
-	return randomGroups;
-}// end loadCivFiles
-
-/**
- * Gets an array of all classes for this identity template
+ * @return {string[]} - All the classes for this identity template.
  */
 function GetIdentityClasses(template)
 {
-	var classList = [];
+	let classString = "";
+
 	if (template.Classes && template.Classes._string)
-		classList = classList.concat(template.Classes._string.split(/\s+/));
+		classString += " " + template.Classes._string;
 
 	if (template.VisibleClasses && template.VisibleClasses._string)
-		classList = classList.concat(template.VisibleClasses._string.split(/\s+/));
+		classString += " " + template.VisibleClasses._string;
 
 	if (template.Rank)
-		classList = classList.concat(template.Rank);
-	return classList;
+		classString += " " + template.Rank;
+
+	return classString.length > 1 ? classString.substring(1).split(" ") : [];
 }
 
 /**
@@ -68,9 +52,7 @@ function GetIdentityClasses(template)
  */
 function GetVisibleIdentityClasses(template)
 {
-	if (template.VisibleClasses && template.VisibleClasses._string)
-		return template.VisibleClasses._string.split(/\s+/);
-	return [];
+	return template.VisibleClasses && template.VisibleClasses._string ? template.VisibleClasses._string.split(" ") : [];
 }
 
 /**
@@ -105,8 +87,8 @@ function MatchesClassList(classes, match)
 		// If the elements are still strings, split them by space or by '+'
 		if (typeof sublist == "string")
 			sublist = sublist.split(/[+\s]+/);
-		if (sublist.every(c => (c[0] == "!" && classes.indexOf(c.substr(1)) == -1)
-		                    || (c[0] != "!" && classes.indexOf(c) != -1)))
+		if (sublist.every(c => (c[0] == "!" && classes.indexOf(c.substr(1)) == -1) ||
+		                       (c[0] != "!" && classes.indexOf(c) != -1)))
 			return true;
 	}
 
@@ -116,7 +98,7 @@ function MatchesClassList(classes, match)
 /**
  * Gets the value originating at the value_path as-is, with no modifiers applied.
  *
- * @param {object} template - A valid template as returned from a template loader.
+ * @param {Object} template - A valid template as returned from a template loader.
  * @param {string} value_path - Route to value within the xml template structure.
  * @return {number}
  */
@@ -131,11 +113,11 @@ function GetBaseTemplateDataValue(template, value_path)
 /**
  * Gets the value originating at the value_path with the modifiers dictated by the mod_key applied.
  *
- * @param {object} template - A valid template as returned from a template loader.
+ * @param {Object} template - A valid template as returned from a template loader.
  * @param {string} value_path - Route to value within the xml template structure.
  * @param {string} mod_key - Tech modification key, if different from value_path.
  * @param {number} player - Optional player id.
- * @param {object} modifiers - Value modifiers from auto-researched techs, unit upgrades,
+ * @param {Object} modifiers - Value modifiers from auto-researched techs, unit upgrades,
  *                             etc. Optional as only used if no player id provided.
  * @return {number} Modifier altered value.
  */
@@ -146,8 +128,8 @@ function GetModifiedTemplateDataValue(template, value_path, mod_key, player, mod
 
 	if (player)
 		current_value = ApplyValueModificationsToTemplate(mod_key, current_value, player, template);
-	else if (modifiers)
-		current_value = GetTechModifiedProperty(modifiers, GetIdentityClasses(template.Identity), mod_key, current_value);
+	else if (modifiers && modifiers[mod_key])
+		current_value = GetTechModifiedProperty(modifiers[mod_key], GetIdentityClasses(template.Identity), current_value);
 
 	// Using .toFixed() to get around spidermonkey's treatment of numbers (3 * 1.1 = 3.3000000000000003 for instance).
 	return +current_value.toFixed(8);
@@ -159,17 +141,15 @@ function GetModifiedTemplateDataValue(template, value_path, mod_key, player, mod
  * NOTICE: The data returned here should have the same structure as
  * the object returned by GetEntityState and GetExtendedEntityState!
  *
- * @param {object} template - A valid template as returned by the template loader.
+ * @param {Object} template - A valid template as returned by the template loader.
  * @param {number} player - An optional player id to get the technology modifications
  *                          of properties.
- * @param {object} auraTemplates - In the form of { key: { "auraName": "", "auraDescription": "" } }.
- * @param {object} resources - An instance of the Resources prototype.
- * @param {object} damageTypes - An instance of the DamageTypes prototype.
- * @param {object} modifiers - Modifications from auto-researched techs, unit upgrades
+ * @param {Object} auraTemplates - In the form of { key: { "auraName": "", "auraDescription": "" } }.
+ * @param {Object} modifiers - Modifications from auto-researched techs, unit upgrades
  *                             etc. Optional as only used if there's no player
  *                             id provided.
  */
-function GetTemplateDataHelper(template, player, auraTemplates, resources, damageTypes, modifiers={})
+function GetTemplateDataHelper(template, player, auraTemplates, modifiers = {})
 {
 	// Return data either from template (in tech tree) or sim state (ingame).
 	// @param {string} value_path - Route to the value within the template.
@@ -180,12 +160,49 @@ function GetTemplateDataHelper(template, player, auraTemplates, resources, damag
 
 	let ret = {};
 
-	if (template.Armour)
+	if (template.Resistance)
 	{
-		ret.armour = {};
-		for (let damageType of damageTypes.GetTypes())
-			ret.armour[damageType] = getEntityValue("Armour/" + damageType);
+		// Don't show Foundation resistance.
+		ret.resistance = {};
+		if (template.Resistance.Entity)
+		{
+			if (template.Resistance.Entity.Damage)
+			{
+				ret.resistance.Damage = {};
+				for (let damageType in template.Resistance.Entity.Damage)
+					ret.resistance.Damage[damageType] = getEntityValue("Resistance/Entity/Damage/" + damageType);
+			}
+			if (template.Resistance.Entity.Capture)
+				ret.resistance.Capture = getEntityValue("Resistance/Entity/Capture");
+			if (template.Resistance.Entity.ApplyStatus)
+			{
+				ret.resistance.ApplyStatus = {};
+				for (let statusEffect in template.Resistance.Entity.ApplyStatus)
+					ret.resistance.ApplyStatus[statusEffect] = {
+						"blockChance": getEntityValue("Resistance/Entity/ApplyStatus/" + statusEffect + "/BlockChance"),
+						"duration": getEntityValue("Resistance/Entity/ApplyStatus/" + statusEffect + "/Duration")
+					};
+			}
+		}
 	}
+
+	let getAttackEffects = (temp, path) => {
+		let effects = {};
+		if (temp.Capture)
+			effects.Capture = getEntityValue(path + "/Capture");
+
+		if (temp.Damage)
+		{
+			effects.Damage = {};
+			for (let damageType in temp.Damage)
+				effects.Damage[damageType] = getEntityValue(path + "/Damage/" + damageType);
+		}
+
+		if (temp.ApplyStatus)
+			effects.ApplyStatus = temp.ApplyStatus;
+
+		return effects;
+	};
 
 	if (template.Attack)
 	{
@@ -196,34 +213,32 @@ function GetTemplateDataHelper(template, player, auraTemplates, resources, damag
 				return getEntityValue("Attack/" + type + "/" + stat);
 			};
 
-			if (type == "Capture")
-				ret.attack.Capture = {
-					"value": getAttackStat("Value")
-				};
-			else
-			{
-				ret.attack[type] = {
-					"minRange": getAttackStat("MinRange"),
-					"maxRange": getAttackStat("MaxRange"),
-					"elevationBonus": getAttackStat("ElevationBonus")
-				};
-				for (let damageType of damageTypes.GetTypes())
-					ret.attack[type][damageType] = getAttackStat(damageType);
+			ret.attack[type] = {
+				"attackName": {
+					"name": template.Attack[type].AttackName._string || template.Attack[type].AttackName,
+					"context": template.Attack[type].AttackName["@context"]
+				},
+				"minRange": getAttackStat("MinRange"),
+				"maxRange": getAttackStat("MaxRange"),
+				"elevationBonus": getAttackStat("ElevationBonus")
+			};
 
-				ret.attack[type].elevationAdaptedRange = Math.sqrt(ret.attack[type].maxRange *
-					(2 * ret.attack[type].elevationBonus + ret.attack[type].maxRange));
-			}
+			ret.attack[type].elevationAdaptedRange = Math.sqrt(ret.attack[type].maxRange *
+				(2 * ret.attack[type].elevationBonus + ret.attack[type].maxRange));
+
 			ret.attack[type].repeatTime = getAttackStat("RepeatTime");
+			if (template.Attack[type].Projectile)
+				ret.attack[type].friendlyFire = template.Attack[type].Projectile.FriendlyFire == "true";
+
+			Object.assign(ret.attack[type], getAttackEffects(template.Attack[type], "Attack/" + type));
 
 			if (template.Attack[type].Splash)
 			{
 				ret.attack[type].splash = {
-					// true if undefined
 					"friendlyFire": template.Attack[type].Splash.FriendlyFire != "false",
-					"shape": template.Attack[type].Splash.Shape
+					"shape": template.Attack[type].Splash.Shape,
 				};
-				for (let damageType of damageTypes.GetTypes())
-					ret.attack[type].splash[damageType] = getAttackStat("Splash/" + damageType);
+				Object.assign(ret.attack[type].splash, getAttackEffects(template.Attack[type].Splash, "Attack/" + type + "/Splash"));
 			}
 		}
 	}
@@ -231,24 +246,17 @@ function GetTemplateDataHelper(template, player, auraTemplates, resources, damag
 	if (template.DeathDamage)
 	{
 		ret.deathDamage = {
-			"friendlyFire": template.DeathDamage.FriendlyFire != "false"
+			"friendlyFire": template.DeathDamage.FriendlyFire != "false",
 		};
-		for (let damageType of damageTypes.GetTypes())
-			ret.deathDamage[damageType] = getEntityValue("DeathDamage/" + damageType);
+
+		Object.assign(ret.deathDamage, getAttackEffects(template.DeathDamage, "DeathDamage"));
 	}
 
 	if (template.Auras && auraTemplates)
 	{
 		ret.auras = {};
 		for (let auraID of template.Auras._string.split(/\s+/))
-		{
-			let aura = auraTemplates[auraID];
-			ret.auras[auraID] = {
-					"name": aura.auraName,
-					"description": aura.auraDescription || null,
-					"radius": aura.radius || null
-				};
-		}
+			ret.auras[auraID] = GetAuraDataHelper(auraTemplates[auraID]);
 	}
 
 	if (template.BuildingAI)
@@ -283,9 +291,13 @@ function GetTemplateDataHelper(template, player, auraTemplates, resources, damag
 	}
 
 	if (template.TrainingRestrictions)
+	{
 		ret.trainingRestrictions = {
-			"category": template.TrainingRestrictions.Category,
+			"category": template.TrainingRestrictions.Category
 		};
+		if (template.TrainingRestrictions.MatchLimit)
+			ret.trainingRestrictions.matchLimit = +template.TrainingRestrictions.MatchLimit;
+	}
 
 	if (template.Cost)
 	{
@@ -295,9 +307,6 @@ function GetTemplateDataHelper(template, player, auraTemplates, resources, damag
 
 		if (template.Cost.Population)
 			ret.cost.population = getEntityValue("Cost/Population");
-
-		if (template.Cost.PopulationBonus)
-			ret.cost.populationBonus = getEntityValue("Cost/PopulationBonus");
 
 		if (template.Cost.BuildTime)
 			ret.cost.time = getEntityValue("Cost/BuildTime");
@@ -330,9 +339,9 @@ function GetTemplateDataHelper(template, player, auraTemplates, resources, damag
 
 	if (template.Heal)
 		ret.heal = {
-			"hp": getEntityValue("Heal/HP"),
+			"health": getEntityValue("Heal/Health"),
 			"range": getEntityValue("Heal/Range"),
-			"rate": getEntityValue("Heal/Rate")
+			"interval": getEntityValue("Heal/Interval")
 		};
 
 	if (template.ResourceGatherer)
@@ -342,6 +351,11 @@ function GetTemplateDataHelper(template, player, auraTemplates, resources, damag
 		for (let type in template.ResourceGatherer.Rates)
 			ret.resourceGatherRates[type] = getEntityValue("ResourceGatherer/Rates/"+ type) * baseSpeed;
 	}
+
+	if (template.ResourceDropsite)
+		ret.resourceDropsite = {
+			"types": template.ResourceDropsite.Types.split(" ")
+		};
 
 	if (template.ResourceTrickle)
 	{
@@ -394,6 +408,11 @@ function GetTemplateDataHelper(template, player, auraTemplates, resources, damag
 			"time": getEntityValue("Pack/Time"),
 		};
 
+	if (template.Population && template.Population.Bonus)
+		ret.population = {
+			"bonus": getEntityValue("Population/Bonus")
+		};
+
 	if (template.Health)
 		ret.health = Math.round(getEntityValue("Health/Max"));
 
@@ -416,8 +435,9 @@ function GetTemplateDataHelper(template, player, auraTemplates, resources, damag
 		ret.speed = {
 			"walk": getEntityValue("UnitMotion/WalkSpeed"),
 		};
-		if (template.UnitMotion.Run)
-			ret.speed.run = getEntityValue("UnitMotion/Run/Speed");
+		ret.speed.run = getEntityValue("UnitMotion/WalkSpeed");
+		if (template.UnitMotion.RunMultiplier)
+			ret.speed.run *= getEntityValue("UnitMotion/RunMultiplier");
 	}
 
 	if (template.Upgrade)
@@ -462,7 +482,7 @@ function GetTemplateDataHelper(template, player, auraTemplates, resources, damag
 			"templates": {
 				"tower": template.WallSet.Templates.Tower,
 				"gate": template.WallSet.Templates.Gate,
-				"fort": template.WallSet.Templates.Fort || "structures/" + template.Identity.Civ + "_fortress",
+				"fort": template.WallSet.Templates.Fort || "structures/" + template.Identity.Civ + "/fortress",
 				"long": template.WallSet.Templates.WallLong,
 				"medium": template.WallSet.Templates.WallMedium,
 				"short": template.WallSet.Templates.WallShort
@@ -473,7 +493,7 @@ function GetTemplateDataHelper(template, player, auraTemplates, resources, damag
 		if (template.WallSet.Templates.WallEnd)
 			ret.wallSet.templates.end = template.WallSet.Templates.WallEnd;
 		if (template.WallSet.Templates.WallCurves)
-			ret.wallSet.templates.curves = template.WallSet.Templates.WallCurves.split(" ");
+			ret.wallSet.templates.curves = template.WallSet.Templates.WallCurves.split(/\s+/);
 	}
 
 	if (template.WallPiece)
@@ -489,7 +509,7 @@ function GetTemplateDataHelper(template, player, auraTemplates, resources, damag
 
 /**
  * Get basic information about a technology template.
- * @param {object} template - A valid template as obtained by loading the tech JSON file.
+ * @param {Object} template - A valid template as obtained by loading the tech JSON file.
  * @param {string} civ - Civilization for which the tech requirements should be calculated.
  */
 function GetTechnologyBasicDataHelper(template, civ)
@@ -509,7 +529,7 @@ function GetTechnologyBasicDataHelper(template, civ)
 
 /**
  * Get information about a technology template.
- * @param {object} template - A valid template as obtained by loading the tech JSON file.
+ * @param {Object} template - A valid template as obtained by loading the tech JSON file.
  * @param {string} civ - Civilization for which the specific name and tech requirements should be returned.
  */
 function GetTechnologyDataHelper(template, civ, resources)
@@ -527,6 +547,22 @@ function GetTechnologyDataHelper(template, civ, resources)
 	ret.requirementsTooltip = template.requirementsTooltip || "";
 
 	return ret;
+}
+
+/**
+ * Get information about an aura template.
+ * @param {object} template - A valid template as obtained by loading the aura JSON file.
+ */
+function GetAuraDataHelper(template)
+{
+	return {
+		"name": {
+			"generic": template.auraName,
+		},
+		"description": template.auraDescription || null,
+		"modifications": template.modifications,
+		"radius": template.radius || null,
+	};
 }
 
 function calculateCarriedResources(carriedResources, tradingGoods)

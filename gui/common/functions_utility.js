@@ -4,16 +4,29 @@
  * And store the timestamp of last interaction for each notification.
  */
 var g_SoundNotifications = {
-	"nick": { "soundfile": "audio/interface/ui/chat_alert.ogg", "threshold": 3000 }
+	"nick": { "soundfile": "audio/interface/ui/chat_alert.ogg", "threshold": 3000 },
+	"gamesetup.join": { "soundfile": "audio/interface/ui/gamesetup_join.ogg", "threshold": 0 }
 };
 
 /**
- * Save setting for current instance and write setting to the user config file.
+ * These events are fired when the user has closed the options page.
+ * The handlers are provided a Set storing which config values have changed.
+ * TODO: This should become a GUI event sent by the engine.
  */
-function saveSettingAndWriteToUserConfig(setting, value)
+var g_ConfigChangeHandlers = new Set();
+
+function registerConfigChangeHandler(handler)
 {
-	Engine.ConfigDB_CreateValue("user", setting, value);
-	Engine.ConfigDB_WriteValueToFile("user", setting, value, "config/user.cfg");
+	g_ConfigChangeHandlers.add(handler);
+}
+
+/**
+ * @param changes - a Set of config names
+ */
+function fireConfigChangeHandlers(changes)
+{
+	for (let handler of g_ConfigChangeHandlers)
+		handler(changes);
 }
 
 /**
@@ -30,18 +43,6 @@ function loadCivData(selectableOnly, gaia)
 
 	return deepfreeze(civData);
 }
-
-/**
- * Returns random civ selection groups with translated titles and tooltips.
- */
-function loadRandomCivGroups()
-{
-	let randomGroups = loadRandomCivFiles();
-
-	translateObjectKeys(randomGroups, ["Title", "Tooltip"]);
-
-	return deepfreeze(randomGroups);
-}// end loadRandomCivGroups
 
 // A sorting function for arrays of objects with 'name' properties, ignoring case
 function sortNameIgnoreCase(x, y)
@@ -70,6 +71,14 @@ function unescapeText(text)
 }
 
 /**
+ * Prepends a backslash to all quotation marks.
+ */
+function escapeQuotation(text)
+{
+	return text.replace(/"/g, "\\\"");
+}
+
+/**
  * Merge players by team to remove duplicate Team entries, thus reducing the packet size of the lobby report.
  */
 function playerDataToStringifiedTeamList(playerData)
@@ -95,7 +104,11 @@ function stringifiedTeamListToPlayerData(stringifiedTeamList)
 	{
 		teamList = JSON.parse(unescapeText(stringifiedTeamList));
 	}
-	catch (e) {}
+	catch (e)
+	{
+		// Ignore invalid input from remote users
+		return [];
+	}
 
 	let playerData = [];
 
@@ -107,11 +120,6 @@ function stringifiedTeamListToPlayerData(stringifiedTeamList)
 		}
 
 	return playerData;
-}
-
-function translateMapTitle(mapTitle)
-{
-	return mapTitle == "random" ? translateWithContext("map selection", "Random") : translate(mapTitle);
 }
 
 function removeDupes(array)
@@ -161,7 +169,7 @@ function tryAutoComplete(text, autoCompleteList)
 	return text;
 }
 
-function autoCompleteNick(guiObject, playernames)
+function autoCompleteText(guiObject, words)
 {
 	let text = guiObject.caption;
 	if (!text.length)
@@ -169,24 +177,10 @@ function autoCompleteNick(guiObject, playernames)
 
 	let bufferPosition = guiObject.buffer_position;
 	let textTillBufferPosition = text.substring(0, bufferPosition);
-	let newText = tryAutoComplete(textTillBufferPosition, playernames);
+	let newText = tryAutoComplete(textTillBufferPosition, words);
 
 	guiObject.caption = newText + text.substring(bufferPosition);
 	guiObject.buffer_position = bufferPosition + (newText.length - textTillBufferPosition.length);
-}
-
-function clearChatMessages()
-{
-	g_ChatMessages.length = 0;
-	Engine.GetGUIObjectByName("chatText").caption = "";
-
-	try
-	{
-		for (let timer of g_ChatTimers)
-			clearTimeout(timer);
-		g_ChatTimers.length = 0;
-	}
-	catch (e) {}
 }
 
 /**
@@ -235,4 +229,12 @@ function hideRemaining(parentName, start = 0)
 
 	for (let i = start; i < objects.length; ++i)
 		objects[i].hidden = true;
+}
+
+function getBuildString()
+{
+	return sprintf(translate("Build: %(buildDate)s (%(revision)s)"), {
+		"buildDate": Engine.GetBuildDate(),
+		"revision": Engine.GetBuildRevision()
+	});
 }
