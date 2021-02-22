@@ -44,6 +44,18 @@ function loadCivData(selectableOnly, gaia)
 	return deepfreeze(civData);
 }
 
+/**
+ * Returns random civ selection groups with translated titles and tooltips.
+ */
+function loadRandomCivGroups()
+{
+	let randomGroups = loadRandomCivFiles();
+
+	translateObjectKeys(randomGroups, ["Title", "Tooltip"]);
+
+	return deepfreeze(randomGroups);
+}// end loadRandomCivGroups
+
 // A sorting function for arrays of objects with 'name' properties, ignoring case
 function sortNameIgnoreCase(x, y)
 {
