@@ -86,11 +86,11 @@ PlayerSettingControls.PlayerCiv = class extends GameSettingControlDropdown
 		values.sort(sortNameIgnoreCase);
 
 		let random_civ_groups = g_RandomCivGroups.map((group) => ({
-			'name': 'Random/' + group.Title,
+			'name': setStringTags('Random/' + group.Title,
+				group.Color ? { "color": group.Color } : this.RandomItemTags),
 			'civ': sprintf('random.%s', group.Code),
 			'autocomplete': 'Random/' + group.Title,
 			'tooltip': group.Tooltip,
-			'color': group.Color ? group.Color : "orange",
 			'gui_order': group.GUIOrder,
 			'random': true
 		})).sort((a, b) => a.gui_order - b.gui_order);
