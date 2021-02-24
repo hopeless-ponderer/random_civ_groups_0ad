@@ -31,6 +31,7 @@ Although this mod supports many other mods, it only requires basic 0ad.
 This mod alters the following javascript files:
 
 - gui/gamesetup/gamesetup.js
+- gui/gamesetup/Pages/GameSetupPage/GameSettings/PerPlayer/Dropdowns/PlayerCiv.js
 - gui/common/functions\_utility.js
 - globalscripts/Templates.js
 
