@@ -2,10 +2,13 @@
 	"Title": "Barbarian",
 	"Code": "barb",
 	"GUIOrder": 1,
-	"Tooltip": "Less-developed European civs, including Britons, Gauls, and Iberians.",
+	"Tooltip": "Tribespeople at the fringes of the Greco-Roman World, plus steppe nomads.",
 	"Weights": {
-		"brit": 1,
-		"gaul": 1,
-		"iber": 1
+		"brit": 2,
+		"gaul": 2,
+		"iber": 2,
+		"scyth": 2,
+		"sueb": 2,
+		"xion": 1
 	}
 }

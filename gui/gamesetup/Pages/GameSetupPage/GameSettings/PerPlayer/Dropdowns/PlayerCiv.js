@@ -55,6 +55,9 @@ PlayerSettingControls.PlayerCiv = class extends GameSettingControlDropdown
 					g_Settings.PlayerDefaults[this.playerIndex + 1].Civ :
 					this.RandomCivId;
 
+			if (pData.Civ === this.RandomCivId)
+				pData.Random = true;
+
 			this.gameSettingsControl.updateGameAttributes();
 		}
 	}
@@ -89,7 +92,7 @@ PlayerSettingControls.PlayerCiv = class extends GameSettingControlDropdown
 			'name': setStringTags('Random/' + group.Title,
 				group.Color ? { "color": group.Color } : this.RandomItemTags),
 			'civ': sprintf('random.%s', group.Code),
-			'autocomplete': 'Random/' + group.Title,
+			'autocomplete': group.Title,
 			'tooltip': group.Tooltip,
 			'gui_order': group.GUIOrder,
 			'random': true

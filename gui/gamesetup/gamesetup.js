@@ -11,23 +11,30 @@ const g_VictoryConditions = g_Settings && g_Settings.VictoryConditions;
  * Load unselectable civs as they could appear in scenario maps.
  */
 const g_CivData = loadCivData(false, false);
-const g_RandomCivGroups = loadRandomCivGroups().filter((group) => {
+const g_RandomCivGroups = loadRandomCivGroups().map((group) => {
 	if (group.Disable)
-		return false;
-	if (group.Weights.length < 1) {
-		warn(sprintf('Random civ groups must contain at least one civ; disabling %s', group.Title));
-		return false;
-	}
+		return null;
+	let weights = {};
 	for (let civ in group.Weights) {
-		if (!g_CivData.hasOwnProperty(civ))
-			return false;
 		if (group.Weights[civ] <= 0) {
 			warn(sprintf('Random civ group weights must be > 0 (got "%s": %d); disabling %s', civ, group.Weights[civ], group.Title));
-			return false;
+			return null;
 		}
+		if (g_CivData.hasOwnProperty(civ) && g_CivData[civ].SelectableInGameSetup)
+			weights[civ] = group.Weights[civ];
 	}// end for civ
-	return true;
-});
+	if (Object.keys(weights).length < 2)
+	{
+		return null;
+	}
+	let filtered_group = {};
+	for (let property in group) {
+		if (property !== 'Weights')
+			filtered_group[property] = group[property];
+	}
+	filtered_group.Weights = weights;
+	return filtered_group;
+}).filter((group) => group);
 
 /**
  * Whether this is a single- or multiplayer match.

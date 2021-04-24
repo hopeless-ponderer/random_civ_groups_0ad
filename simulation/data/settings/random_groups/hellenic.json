@@ -2,12 +2,14 @@
 	"Title": "Hellenic",
 	"Code": "hele",
 	"GUIOrder": 1,
-	"Tooltip": "Greek civs.",
+	"Tooltip": "Greek civs, including successor kingdoms.",
 	"Weights": {
 		"athen": 3,
+		"epir": 2.5,
 		"mace": 2.5,
-		"ptol": 1,
+		"ptol": 2,
 		"sele": 2,
-		"spart": 3
+		"spart": 3,
+		"theb": 3
 	}
 }

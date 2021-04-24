@@ -1,10 +1,11 @@
 {
-	"Title": "Non-European",
-	"Code": "non_euro",
+	"Title": "Elephant Trainers",
+	"Code": "elephant",
 	"GUIOrder": 1,
-	"Tooltip": "Non-European civs.",
+	"Tooltip": "Civs that can train elephants.",
 	"Weights": {
 		"cart": 1,
+		"epir": 1,
 		"kush": 1,
 		"maur": 1,
 		"pers": 1,
