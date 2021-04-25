@@ -1,6 +1,6 @@
 {
 	"name": "random_civ_groups",
-	"version": "0.24.1",
+	"version": "0.24.2",
 	"label": "Random Civ Selection Groups",
 	"url": "https://github.com/hopeless-ponderer/random_civ_groups_0ad",
 	"description": "Allows you to select civs randomly from a group instead of from all civs.",
