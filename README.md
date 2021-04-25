@@ -12,18 +12,20 @@ Random selection groups are stored in json files under **simulation/data/setting
 - Color (optional): The color of text used in the selection menu. Defaults to the same color as Random.
 - Disable (optional): If true, prevents the selection group from appearing in the selection menu.
 
-By convention, the "Default" selection group (only civs from the original game) has a GUIOrder of 0, selection groups containing only original game civs have a GUIOrder of 1, and selection groups dependent on other mods have a GUIOrder of 2 or higher.
+By convention, the "Default" selection group (only civs from the original game) has a GUIOrder of 0, selection groups containing mostly original and Delenda Est civs have a GUIOrder of 1, and selection groups dependent on other mods have a GUIOrder of 2 or higher.
 
-Selection groups containing unavailable civs are automatically filtered out of the selection menu.
+Selection groups containing less than two available civs are automatically filtered out of the selection menu.
 
 ## Support for other mods
-Currently, selection groups are provided for the following mods:
+Currently, selection groups are provided for most mods published on [0ad.mod.io](https://0ad.mod.io/), including:
 
+- [Delenda Est](https://github.com/JustusAvramenko/delenda_est)
 - [Terra Magna](https://github.com/0ADMods/terra_magna)
 - [Millennium A.D.](https://github.com/0ADMods/millenniumad)
 - [Aristeia](https://github.com/0ADMods/Aristeia)
-
-I will consider adding selection groups for [Delenda Est](https://github.com/JustusAvramenko/delenda_est), but it might be better served by another mod that overrides some of the selection groups provided here.
+- [Theban Greeks](https://github.com/0ADMods/theban_greeks)
+- [Incas](https://0ad.mod.io/incas-0ad)
+- [Mayas](https://0ad.mod.io/incas-0ad)
 
 ## Compatibility
 Although this mod supports many other mods, it only requires basic 0ad.
