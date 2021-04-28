@@ -23,13 +23,28 @@ const g_RandomCivGroups = loadRandomCivGroups().map((group) => {
 		return null;
 	}
 	let weights = {};
+	if (group.Weights.hasOwnProperty('*') && group.Weights['*'] !== 0) {
+		let std_weight = group.Weights['*'];
+		if (std_weight < 0) {
+			error(sprintf('Random civ group weights must be >= 0 (got "*": %d); disabling %s', std_weight, group.Title));
+			return null;
+		}
+		for (let civ in g_CivData) {
+			if (g_CivData[civ].SelectableInGameSetup)
+				weights[civ] = std_weight;
+		}
+	}
 	for (let civ in group.Weights) {
-		if (group.Weights[civ] <= 0) {
-			error(sprintf('Random civ group weights must be > 0 (got "%s": %d); disabling %s', civ, group.Weights[civ], group.Title));
+		if (civ === '*')
+			continue;
+		if (group.Weights[civ] < 0) {
+			error(sprintf('Random civ group weights must be >= 0 (got "%s": %d); disabling %s', civ, group.Weights[civ], group.Title));
 			return null;
 		}
 		if (g_CivData.hasOwnProperty(civ) && g_CivData[civ].SelectableInGameSetup)
 			weights[civ] = group.Weights[civ];
+		if (weights[civ] === 0)
+			delete weights[civ];
 	}// end for civ
 	if (Object.keys(weights).length < 2)
 	{
