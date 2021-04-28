@@ -8,13 +8,64 @@ Random selection groups are stored in json files under **simulation/data/setting
 - Tooltip: A brief description of the selection group
 - Code: A short, lowercase code which the program will use to identify the selection group
 - GUIOrder: A number that identifies where the selection group will appear in the selection menu. Lower numbers will appear higher.
-- Weights: The list of civs to be selected from and the probability of selecting each one. Weights can be any number greater than zero. The probability of each civ being selected is determined by its weight as a percentage of the sum of weights.
+- Weights: The list of civs to be selected from and the probability of selecting each one. Weights can be any number greater than zero. The probability of each civ being selected is determined by its weight as a percentage of the sum of weights. Using "*" will apply a default weight to all civs (subsequently setting a civ's weight to 0 will remove it from the selection).
 - Color (optional): The color of text used in the selection menu. Defaults to the same color as Random.
 - Disable (optional): If true, prevents the selection group from appearing in the selection menu.
 
 By convention, the "Default" selection group (only civs from the original game) has a GUIOrder of 0, selection groups containing mostly original and Delenda Est civs have a GUIOrder of 1, and selection groups dependent on other mods have a GUIOrder of 2 or higher.
 
 Selection groups containing less than two available civs are automatically filtered out of the selection menu.
+
+## Examples
+
+All African civs:
+
+```json
+{
+	"Title": "African",
+	"Code": "afr",
+	"GUIOrder": 1,
+	"Tooltip": "African civs.",
+	"Weights": {
+		"cart": 1,
+		"kush": 1,
+		"ptol": 1
+	}
+}
+```
+
+All civs except nomads (Scythians and Xiongnu):
+```json
+{
+	"Title": "Non-Nomadic",
+	"Code": "no_nomad",
+	"GUIOrder": 1,
+	"Tooltip": "Non-nomadic civs.",
+	"Weights": {
+		"*": 1,
+		"scyth": 0,
+		"xion": 0
+	}
+}
+```
+
+All civs from Millennium AD:
+```json
+{
+	"Title": "Millennium A.D.",
+	"Code": "millenniumad",
+	"Color": "green",
+	"GUIOrder": 2,
+	"Tooltip": "Civs from Millennium A.D.",
+	"Weights": {
+		"anglo": 1,
+		"byza": 1,
+		"caro": 1,
+		"norse": 1,
+		"umay": 1
+	}
+}
+```
 
 ## Support for other mods
 Currently, selection groups are provided for most mods published on [0ad.mod.io](https://0ad.mod.io/), including:
@@ -38,3 +89,5 @@ This mod alters the following javascript files:
 - globalscripts/Templates.js
 
 Any mod that also alters any of these files will likely be incompatible.
+
+Maintained by hopeless-ponderer at [https://github.com/hopeless-ponderer/random\_civ\_groups\_0ad](https://github.com/hopeless-ponderer/random_civ_groups_0ad).
