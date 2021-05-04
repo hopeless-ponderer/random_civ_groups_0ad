@@ -345,6 +345,11 @@ function GetTemplateDataHelper(template, player, auraTemplates, modifiers = {})
 			warn("GetTemplateDataHelper(): Unrecognized Footprint type");
 	}
 
+	if (template.Garrisonable)
+		ret.garrisonable = {
+			"size": getEntityValue("Garrisonable/Size")
+		};
+
 	if (template.GarrisonHolder)
 	{
 		ret.garrisonHolder = {
@@ -493,6 +498,31 @@ function GetTemplateDataHelper(template, player, auraTemplates, modifiers = {})
 		ret.trader = {
 			"GainMultiplier": getEntityValue("Trader/GainMultiplier")
 		};
+
+	if (template.Treasure)
+	{
+		ret.treasure = {
+			"collectTime": getEntityValue("Treasure/CollectTime"),
+			"resources": {}
+		};
+		for (let resource in template.Treasure.Resources)
+			ret.treasure.resources[resource] = getEntityValue("Treasure/Resources/" + resource);
+	}
+
+	if (template.TurretHolder)
+		ret.turretHolder = {
+			"turretPoints": template.TurretHolder.TurretPoints
+		};
+
+	if (template.Upkeep)
+	{
+		ret.upkeep = {
+			"interval": +template.Upkeep.Interval,
+			"rates": {}
+		};
+		for (let type in template.Upkeep.Rates)
+			ret.upkeep.rates[type] = getEntityValue("Upkeep/Rates/" + type);
+	}
 
 	if (template.WallSet)
 	{
