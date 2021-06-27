@@ -1,0 +1,48 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: hopeless-ponderer <hopelessponderer1123@gmail.com>
+Date: Sun, 27 Jun 2021 09:51:46 -0700
+Subject: [PATCH] removed mentions of Code from README.md
+
+---
+ binaries/data/mods/public/README.md | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/binaries/data/mods/public/README.md b/binaries/data/mods/public/README.md
+index d4dd916e1b..d429974af1 100644
+--- a/binaries/data/mods/public/README.md
++++ b/binaries/data/mods/public/README.md
+@@ -6,7 +6,6 @@ Random selection groups are stored in json files under **simulation/data/setting
+ 
+ - Title: The name that will appear in the civ selection menu
+ - Tooltip: A brief description of the selection group
+-- Code: A short, lowercase code which the program will use to identify the selection group
+ - GUIOrder: A number that identifies where the selection group will appear in the selection menu. Lower numbers will appear higher.
+ - Weights: The list of civs to be selected from and the probability of selecting each one. Weights can be any number greater than zero. The probability of each civ being selected is determined by its weight as a percentage of the sum of weights. Using "*" will apply a default weight to all civs (subsequently setting a civ's weight to 0 will remove it from the selection).
+ - Color (optional): The color of text used in the selection menu. Defaults to the same color as Random.
+@@ -23,7 +22,6 @@ All African civs:
+ ```json
+ {
+ 	"Title": "African",
+-	"Code": "afr",
+ 	"GUIOrder": 1,
+ 	"Tooltip": "African civs.",
+ 	"Weights": {
+@@ -38,7 +36,6 @@ All civs except nomads (Scythians and Xiongnu):
+ ```json
+ {
+ 	"Title": "Non-Nomadic",
+-	"Code": "no_nomad",
+ 	"GUIOrder": 1,
+ 	"Tooltip": "Non-nomadic civs.",
+ 	"Weights": {
+@@ -53,7 +50,6 @@ All civs from Millennium AD:
+ ```json
+ {
+ 	"Title": "Millennium A.D.",
+-	"Code": "millenniumad",
+ 	"Color": "green",
+ 	"GUIOrder": 2,
+ 	"Tooltip": "Civs from Millennium A.D.",
+-- 
+2.25.1
+
