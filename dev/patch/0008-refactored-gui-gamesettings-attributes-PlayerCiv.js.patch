@@ -1,0 +1,37 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: hopeless-ponderer <hopelessponderer1123@gmail.com>
+Date: Sun, 27 Jun 2021 10:30:09 -0700
+Subject: [PATCH] refactored gui/gamesettings/attributes/PlayerCiv.js
+
+---
+ .../mods/public/gui/gamesettings/attributes/PlayerCiv.js     | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/binaries/data/mods/public/gui/gamesettings/attributes/PlayerCiv.js b/binaries/data/mods/public/gui/gamesettings/attributes/PlayerCiv.js
+index 9ccf113539..048b1b2da1 100644
+--- a/binaries/data/mods/public/gui/gamesettings/attributes/PlayerCiv.js
++++ b/binaries/data/mods/public/gui/gamesettings/attributes/PlayerCiv.js
+@@ -82,9 +82,10 @@ GameSettings.prototype.Attributes.PlayerCiv = class PlayerCiv extends GameSettin
+ 		let picked = false;
+ 		for (let i in this.values)
+ 		{
+-			let [randomId, randomCivCode] = this.values[i].split('.');
++			let randomId = this.values[i].substring(0, this.values[i].indexOf('.'));
+ 			if (randomId !== 'random')
+ 				continue;
++			let randomCivCode = this.values[i].substring(this.values[i].indexOf('.') + 1);
+ 			picked = true;
+ 
+ 			if (randomCivCode)
+@@ -99,7 +100,7 @@ GameSettings.prototype.Attributes.PlayerCiv = class PlayerCiv extends GameSettin
+ 							val += civGroup.Weights[key];
+ 						return val;
+ 					})();
+-					let choiceVal = sumWeights * Math.random();
++					let choiceVal = sumWeights * Math.random(Date.now());
+ 					for (let civ in civGroup.Weights) {
+ 						if (civGroup.Weights[civ] >= choiceVal) {
+ 							this.values[i] = civ;
+-- 
+2.25.1
+

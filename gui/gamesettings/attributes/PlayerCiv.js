@@ -82,9 +82,10 @@ GameSettings.prototype.Attributes.PlayerCiv = class PlayerCiv extends GameSettin
 		let picked = false;
 		for (let i in this.values)
 		{
-			let [randomId, randomCivCode] = this.values[i].split('.');
+			let randomId = this.values[i].substring(0, this.values[i].indexOf('.'));
 			if (randomId !== 'random')
 				continue;
+			let randomCivCode = this.values[i].substring(this.values[i].indexOf('.') + 1);
 			picked = true;
 
 			if (randomCivCode)
@@ -99,7 +100,7 @@ GameSettings.prototype.Attributes.PlayerCiv = class PlayerCiv extends GameSettin
 							val += civGroup.Weights[key];
 						return val;
 					})();
-					let choiceVal = sumWeights * Math.random();
+					let choiceVal = sumWeights * Math.random(Date.now());
 					for (let civ in civGroup.Weights) {
 						if (civGroup.Weights[civ] >= choiceVal) {
 							this.values[i] = civ;
