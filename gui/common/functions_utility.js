@@ -53,7 +53,7 @@ function loadRandomCivGroups()
 
 	translateObjectKeys(randomGroups, ["Title", "Tooltip"]);
 
-	return deepfreeze(randomGroups);
+	return randomGroups;
 }// end loadRandomCivGroups
 
 // A sorting function for arrays of objects with 'name' properties, ignoring case

@@ -33,11 +33,13 @@ function loadCivFiles(selectableOnly)
  */
 function loadRandomCivFiles()
 {
+	const randomCivDir = "simulation/data/settings/random_groups/";
 	let randomGroups = [];
 
-	for (let filename of Engine.ListDirectoryFiles("simulation/data/settings/random_groups/", "*.json", false))
+	for (let filename of Engine.ListDirectoryFiles(randomCivDir, "*.json", false))
 	{
 		let data = Engine.ReadJSONFile(filename);
+		data.Code = filename.substring(randomCivDir.length, filename.length - 5);
 
 		randomGroups.push(data);
 	}// end for let filename
