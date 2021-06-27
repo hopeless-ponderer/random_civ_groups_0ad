@@ -86,6 +86,6 @@ This mod alters the following javascript files:
 
 Any mod that also alters any of these files will likely be incompatible.
 
-The mods [Delenda Est](https://github.com/JustusAvramenko/delenda_est) and [Mare Nostrum](https://github.com/Mare-Nostrum-0AD/mare_nostrum) support this feature natively. Please do not try to run this mod on top of these mods, as the redundant code will cause some problems. Civs from _Delenda Est_ are still supported in case they are integrated into _Empires Ascendant_ or other mods.
+Starting with 0AD alph 25 (version 0.25.01), the mods [Delenda Est](https://github.com/JustusAvramenko/delenda_est) and [Mare Nostrum](https://github.com/Mare-Nostrum-0AD/mare_nostrum) support this feature natively. Please do not try to run this mod on top of these mods, as the redundant code will cause some problems. Civs from _Delenda Est_ are still supported in case they are integrated into _Empires Ascendant_ or other mods.
 
 Maintained by hopeless-ponderer at [https://github.com/hopeless-ponderer/random\_civ\_groups\_0ad](https://github.com/hopeless-ponderer/random_civ_groups_0ad).
