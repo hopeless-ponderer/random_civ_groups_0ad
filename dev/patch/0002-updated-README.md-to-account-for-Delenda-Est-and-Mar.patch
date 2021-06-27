@@ -1,0 +1,24 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: hopeless-ponderer <hopelessponderer1123@gmail.com>
+Date: Sun, 27 Jun 2021 08:51:18 -0700
+Subject: [PATCH] updated README.md to account for Delenda Est and Mare Nostrum
+ supporting feature
+
+---
+ binaries/data/mods/public/README.md | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/binaries/data/mods/public/README.md b/binaries/data/mods/public/README.md
+index fd53768307..d4dd916e1b 100644
+--- a/binaries/data/mods/public/README.md
++++ b/binaries/data/mods/public/README.md
+@@ -90,4 +90,6 @@ This mod alters the following javascript files:
+ 
+ Any mod that also alters any of these files will likely be incompatible.
+ 
++The mods [Delenda Est](https://github.com/JustusAvramenko/delenda_est) and [Mare Nostrum](https://github.com/Mare-Nostrum-0AD/mare_nostrum) support this feature natively. Please do not try to run this mod on top of these mods, as the redundant code will cause some problems. Civs from _Delenda Est_ are still supported in case they are integrated into _Empires Ascendant_ or other mods.
++
+ Maintained by hopeless-ponderer at [https://github.com/hopeless-ponderer/random\_civ\_groups\_0ad](https://github.com/hopeless-ponderer/random_civ_groups_0ad).
+-- 
+2.25.1
+
