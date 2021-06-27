@@ -1,6 +1,5 @@
 {
 	"Title": "Hellenes",
-	"Code": "hellenes",
 	"GUIOrder": 1,
 	"Tooltip": "Greek civs, minus the successor kingdoms in Asia and Africa.",
 	"Weights": {

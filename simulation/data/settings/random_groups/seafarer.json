@@ -1,6 +1,5 @@
 {
 	"Title": "Seafarers",
-	"Code": "seafarer",
 	"GUIOrder": 1,
 	"Tooltip": "Civs that are optimized for strong navies. Good for water-based maps.",
 	"Weights": {

@@ -1,6 +1,5 @@
 {
 	"Title": "Horsemen",
-	"Code": "horse",
 	"GUIOrder": 1,
 	"Tooltip": "Civs that excel in training horsemen.",
 	"Weights": {

@@ -1,0 +1,217 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: hopeless-ponderer <hopelessponderer1123@gmail.com>
+Date: Sun, 27 Jun 2021 09:42:08 -0700
+Subject: [PATCH] removed Codes from random civ groups (now redundant because
+ they are generated from file names)
+
+---
+ .../public/simulation/data/settings/random_groups/african.json   | 1 -
+ .../public/simulation/data/settings/random_groups/american.json  | 1 -
+ .../public/simulation/data/settings/random_groups/aristeia.json  | 1 -
+ .../public/simulation/data/settings/random_groups/asian.json     | 1 -
+ .../public/simulation/data/settings/random_groups/barbarian.json | 1 -
+ .../public/simulation/data/settings/random_groups/celtic.json    | 1 -
+ .../public/simulation/data/settings/random_groups/default.json   | 1 -
+ .../simulation/data/settings/random_groups/east_asian.json       | 1 -
+ .../public/simulation/data/settings/random_groups/elephant.json  | 1 -
+ .../public/simulation/data/settings/random_groups/european.json  | 1 -
+ .../public/simulation/data/settings/random_groups/hellenes.json  | 1 -
+ .../public/simulation/data/settings/random_groups/hellenic.json  | 1 -
+ .../public/simulation/data/settings/random_groups/horsemen.json  | 1 -
+ .../simulation/data/settings/random_groups/mediterranean.json    | 1 -
+ .../simulation/data/settings/random_groups/millenniumad.json     | 1 -
+ .../public/simulation/data/settings/random_groups/seafarer.json  | 1 -
+ .../simulation/data/settings/random_groups/terra_magna.json      | 1 -
+ 17 files changed, 17 deletions(-)
+
+diff --git a/binaries/data/mods/public/simulation/data/settings/random_groups/african.json b/binaries/data/mods/public/simulation/data/settings/random_groups/african.json
+index 708961a1b1..aa0572d38c 100644
+--- a/binaries/data/mods/public/simulation/data/settings/random_groups/african.json
++++ b/binaries/data/mods/public/simulation/data/settings/random_groups/african.json
+@@ -1,6 +1,5 @@
+ {
+ 	"Title": "African",
+-	"Code": "afr",
+ 	"GUIOrder": 1,
+ 	"Tooltip": "African civs.",
+ 	"Weights": {
+diff --git a/binaries/data/mods/public/simulation/data/settings/random_groups/american.json b/binaries/data/mods/public/simulation/data/settings/random_groups/american.json
+index 719439d269..4ae0cd26f1 100644
+--- a/binaries/data/mods/public/simulation/data/settings/random_groups/american.json
++++ b/binaries/data/mods/public/simulation/data/settings/random_groups/american.json
+@@ -1,6 +1,5 @@
+ {
+ 	"Title": "American",
+-	"Code": "amer",
+ 	"GUIOrder": 2,
+ 	"Color": "green",
+ 	"Tooltip": "Native American Civs.",
+diff --git a/binaries/data/mods/public/simulation/data/settings/random_groups/aristeia.json b/binaries/data/mods/public/simulation/data/settings/random_groups/aristeia.json
+index e726c24ec3..d6501487e3 100644
+--- a/binaries/data/mods/public/simulation/data/settings/random_groups/aristeia.json
++++ b/binaries/data/mods/public/simulation/data/settings/random_groups/aristeia.json
+@@ -1,7 +1,6 @@
+ {
+ 	"Title": "Aristeia",
+ 	"Tooltip": "Civs from the mod Aristeia.",
+-	"Code": "aristeia",
+ 	"Color": "green",
+ 	"GUIOrder": 2,
+ 	"Weights": {
+diff --git a/binaries/data/mods/public/simulation/data/settings/random_groups/asian.json b/binaries/data/mods/public/simulation/data/settings/random_groups/asian.json
+index 2d3087fa8f..e8197ea758 100644
+--- a/binaries/data/mods/public/simulation/data/settings/random_groups/asian.json
++++ b/binaries/data/mods/public/simulation/data/settings/random_groups/asian.json
+@@ -1,6 +1,5 @@
+ {
+ 	"Title": "Asian",
+-	"Code": "asia",
+ 	"GUIOrder": 1,
+ 	"Tooltip": "Asian civs.",
+ 	"Weights": {
+diff --git a/binaries/data/mods/public/simulation/data/settings/random_groups/barbarian.json b/binaries/data/mods/public/simulation/data/settings/random_groups/barbarian.json
+index 054bc7688e..1de1e37a3b 100644
+--- a/binaries/data/mods/public/simulation/data/settings/random_groups/barbarian.json
++++ b/binaries/data/mods/public/simulation/data/settings/random_groups/barbarian.json
+@@ -1,6 +1,5 @@
+ {
+ 	"Title": "Barbarian",
+-	"Code": "barb",
+ 	"GUIOrder": 1,
+ 	"Tooltip": "Tribespeople at the fringes of the Greco-Roman World, plus steppe nomads.",
+ 	"Weights": {
+diff --git a/binaries/data/mods/public/simulation/data/settings/random_groups/celtic.json b/binaries/data/mods/public/simulation/data/settings/random_groups/celtic.json
+index 20e3838b1e..6e5681f2f1 100644
+--- a/binaries/data/mods/public/simulation/data/settings/random_groups/celtic.json
++++ b/binaries/data/mods/public/simulation/data/settings/random_groups/celtic.json
+@@ -1,6 +1,5 @@
+ {
+ 	"Title": "Celtic",
+-	"Code": "celt",
+ 	"GUIOrder": 1,
+ 	"Tooltip": "Celtic civs.",
+ 	"Weights": {
+diff --git a/binaries/data/mods/public/simulation/data/settings/random_groups/default.json b/binaries/data/mods/public/simulation/data/settings/random_groups/default.json
+index 6d6de28925..0a53eb4817 100644
+--- a/binaries/data/mods/public/simulation/data/settings/random_groups/default.json
++++ b/binaries/data/mods/public/simulation/data/settings/random_groups/default.json
+@@ -1,6 +1,5 @@
+ {
+ 	"Title": "Default",
+-	"Code": "default",
+ 	"GUIOrder": 0,
+ 	"Tooltip": "Vanilla 0ad civs only. No mods.",
+ 	"Weights": {
+diff --git a/binaries/data/mods/public/simulation/data/settings/random_groups/east_asian.json b/binaries/data/mods/public/simulation/data/settings/random_groups/east_asian.json
+index c1ab503da9..8cf3256289 100644
+--- a/binaries/data/mods/public/simulation/data/settings/random_groups/east_asian.json
++++ b/binaries/data/mods/public/simulation/data/settings/random_groups/east_asian.json
+@@ -1,6 +1,5 @@
+ {
+ 	"Title": "East Asian",
+-	"Code": "east_asia",
+ 	"Color": "green",
+ 	"GUIOrder": 2,
+ 	"Tooltip": "Chinese and Xiongnu civs from Terra Magna.",
+diff --git a/binaries/data/mods/public/simulation/data/settings/random_groups/elephant.json b/binaries/data/mods/public/simulation/data/settings/random_groups/elephant.json
+index 210d811084..7b3fddb558 100644
+--- a/binaries/data/mods/public/simulation/data/settings/random_groups/elephant.json
++++ b/binaries/data/mods/public/simulation/data/settings/random_groups/elephant.json
+@@ -1,6 +1,5 @@
+ {
+ 	"Title": "Elephant Trainers",
+-	"Code": "elephant",
+ 	"GUIOrder": 1,
+ 	"Tooltip": "Civs that can train elephants.",
+ 	"Weights": {
+diff --git a/binaries/data/mods/public/simulation/data/settings/random_groups/european.json b/binaries/data/mods/public/simulation/data/settings/random_groups/european.json
+index 7c248337a9..4c88e30e72 100644
+--- a/binaries/data/mods/public/simulation/data/settings/random_groups/european.json
++++ b/binaries/data/mods/public/simulation/data/settings/random_groups/european.json
+@@ -1,6 +1,5 @@
+ {
+ 	"Title": "European",
+-	"Code": "euro",
+ 	"GUIOrder": 1,
+ 	"Tooltip": "European civs.",
+ 	"Weights": {
+diff --git a/binaries/data/mods/public/simulation/data/settings/random_groups/hellenes.json b/binaries/data/mods/public/simulation/data/settings/random_groups/hellenes.json
+index 079f8ad6fe..4ac1018b12 100644
+--- a/binaries/data/mods/public/simulation/data/settings/random_groups/hellenes.json
++++ b/binaries/data/mods/public/simulation/data/settings/random_groups/hellenes.json
+@@ -1,6 +1,5 @@
+ {
+ 	"Title": "Hellenes",
+-	"Code": "hellenes",
+ 	"GUIOrder": 1,
+ 	"Tooltip": "Greek civs, minus the successor kingdoms in Asia and Africa.",
+ 	"Weights": {
+diff --git a/binaries/data/mods/public/simulation/data/settings/random_groups/hellenic.json b/binaries/data/mods/public/simulation/data/settings/random_groups/hellenic.json
+index 86fb32e8b5..421d1e0c50 100644
+--- a/binaries/data/mods/public/simulation/data/settings/random_groups/hellenic.json
++++ b/binaries/data/mods/public/simulation/data/settings/random_groups/hellenic.json
+@@ -1,6 +1,5 @@
+ {
+ 	"Title": "Hellenic",
+-	"Code": "hellenic",
+ 	"GUIOrder": 1,
+ 	"Tooltip": "Greek civs, including successor kingdoms.",
+ 	"Weights": {
+diff --git a/binaries/data/mods/public/simulation/data/settings/random_groups/horsemen.json b/binaries/data/mods/public/simulation/data/settings/random_groups/horsemen.json
+index 652ab96a4b..fa4185c2f3 100644
+--- a/binaries/data/mods/public/simulation/data/settings/random_groups/horsemen.json
++++ b/binaries/data/mods/public/simulation/data/settings/random_groups/horsemen.json
+@@ -1,6 +1,5 @@
+ {
+ 	"Title": "Horsemen",
+-	"Code": "horse",
+ 	"GUIOrder": 1,
+ 	"Tooltip": "Civs that excel in training horsemen.",
+ 	"Weights": {
+diff --git a/binaries/data/mods/public/simulation/data/settings/random_groups/mediterranean.json b/binaries/data/mods/public/simulation/data/settings/random_groups/mediterranean.json
+index f2b38f663e..28e8342c56 100644
+--- a/binaries/data/mods/public/simulation/data/settings/random_groups/mediterranean.json
++++ b/binaries/data/mods/public/simulation/data/settings/random_groups/mediterranean.json
+@@ -1,6 +1,5 @@
+ {
+ 	"Title": "Mediterranean",
+-	"Code": "med",
+ 	"GUIOrder": 1,
+ 	"Tooltip": "Civs based around the mediterranean sea. Includes Rome, Carthage, and the Hellenic Civs.",
+ 	"Weights": {
+diff --git a/binaries/data/mods/public/simulation/data/settings/random_groups/millenniumad.json b/binaries/data/mods/public/simulation/data/settings/random_groups/millenniumad.json
+index ad3ec93ffb..2aae535eeb 100644
+--- a/binaries/data/mods/public/simulation/data/settings/random_groups/millenniumad.json
++++ b/binaries/data/mods/public/simulation/data/settings/random_groups/millenniumad.json
+@@ -1,6 +1,5 @@
+ {
+ 	"Title": "Millennium A.D.",
+-	"Code": "millenniumad",
+ 	"Color": "green",
+ 	"GUIOrder": 2,
+ 	"Tooltip": "Civs from Millennium A.D.",
+diff --git a/binaries/data/mods/public/simulation/data/settings/random_groups/seafarer.json b/binaries/data/mods/public/simulation/data/settings/random_groups/seafarer.json
+index b9d8476769..2b329f1fae 100644
+--- a/binaries/data/mods/public/simulation/data/settings/random_groups/seafarer.json
++++ b/binaries/data/mods/public/simulation/data/settings/random_groups/seafarer.json
+@@ -1,6 +1,5 @@
+ {
+ 	"Title": "Seafarers",
+-	"Code": "seafarer",
+ 	"GUIOrder": 1,
+ 	"Tooltip": "Civs that are optimized for strong navies. Good for water-based maps.",
+ 	"Weights": {
+diff --git a/binaries/data/mods/public/simulation/data/settings/random_groups/terra_magna.json b/binaries/data/mods/public/simulation/data/settings/random_groups/terra_magna.json
+index e355a54eeb..aae0ea5427 100644
+--- a/binaries/data/mods/public/simulation/data/settings/random_groups/terra_magna.json
++++ b/binaries/data/mods/public/simulation/data/settings/random_groups/terra_magna.json
+@@ -1,6 +1,5 @@
+ {
+ 	"Title": "Terra Magna",
+-	"Code": "terra_magna",
+ 	"Color": "green",
+ 	"GUIOrder": 2,
+ 	"Tooltip": "Civs from Terra Magna.",
+-- 
+2.25.1
+

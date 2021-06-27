@@ -1,6 +1,5 @@
 {
 	"Title": "Elephant Trainers",
-	"Code": "elephant",
 	"GUIOrder": 1,
 	"Tooltip": "Civs that can train elephants.",
 	"Weights": {

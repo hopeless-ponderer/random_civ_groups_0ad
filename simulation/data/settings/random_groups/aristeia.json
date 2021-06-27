@@ -1,7 +1,6 @@
 {
 	"Title": "Aristeia",
 	"Tooltip": "Civs from the mod Aristeia.",
-	"Code": "aristeia",
 	"Color": "green",
 	"GUIOrder": 2,
 	"Weights": {
